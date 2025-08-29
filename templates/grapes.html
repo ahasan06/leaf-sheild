@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" class="h-full">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ title }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-900" data-model="{{ model_name }}">
+  <header class="border-b bg-white">
+    <div class="max-w-6xl mx-auto px-4 py-4 md:py-6 flex items-center justify-between">
+      <h1 class="text-xl md:text-2xl font-semibold tracking-tight">{{ title }}</h1>
+      <a href="/model_info?model=grapes" target="_blank" class="text-sm text-gray-500 hover:text-gray-700">Model info</a>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-4 py-6 md:py-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
+      <section class="bg-white rounded-2xl shadow-sm ring-1 ring-gray-200 p-6 md:p-8">
+        <h2 class="text-lg font-medium mb-4">Upload a leaf photo</h2>
+        <form id="form" enctype="multipart/form-data" class="space-y-5">
+          <div class="space-y-2">
+            <label for="file" class="block text-sm font-medium text-gray-700">Image file</label>
+            <input id="file" name="image" type="file" accept="image/*" required
+                   class="block w-full rounded-xl border-gray-300 shadow-sm file:mr-4 file:rounded-xl file:border-0 file:bg-gray-900 file:px-4 file:py-2 file:text-white file:text-sm hover:file:bg-gray-800 focus:border-gray-900 focus:ring-gray-900" />
+            <p class="text-xs text-gray-500">Accepted: JPG, PNG, WEBP. Max 20 MB.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button id="btn" type="submit"
+                    class="inline-flex items-center justify-center rounded-xl bg-gray-900 px-4 py-2 text-white text-sm font-medium shadow hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2">
+              <svg id="spinner" class="-ml-1 mr-2 h-4 w-4 animate-spin hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" class="opacity-25"></circle><path d="M4 12a8 8 0 018-8" class="opacity-75"></path></svg>
+              <span id="btnText">Predict</span>
+            </button>
+            <a href="/" class="text-sm text-gray-500 hover:text-gray-700">Back</a>
+          </div>
+        </form>
+      </section>
+
+      <section class="bg-white rounded-2xl shadow-sm ring-1 ring-gray-200 p-6 md:p-8">
+        <h2 class="text-lg font-medium mb-4">Preview</h2>
+        <div class="aspect-square bg-gray-100 rounded-xl overflow-hidden flex items-center justify-center">
+          <img id="preview" alt="Preview will appear here" class="max-h-full max-w-full object-contain" />
+        </div>
+        <p class="mt-2 text-xs text-gray-500">Your selected image will appear here before prediction.</p>
+      </section>
+    </div>
+
+    <section id="resultCard" class="mt-6 md:mt-10 bg-white rounded-2xl shadow-sm ring-1 ring-gray-200 p-6 md:p-8 hidden">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+        <div id="summary" class="text-base"></div>
+        <div id="badge" class="inline-flex items-center rounded-full px-3 py-1 text-xs font-medium"></div>
+      </div>
+
+      <div class="mt-5 grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-sm font-semibold text-gray-700 mb-2">Class probabilities</h3>
+          <div class="overflow-hidden rounded-xl border border-gray-200">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Class</th>
+                  <th class="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Probability</th>
+                </tr>
+              </thead>
+              <tbody id="probsBody" class="divide-y divide-gray-100 bg-white"></tbody>
+            </table>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-sm font-semibold text-gray-700 mb-2">Raw JSON</h3>
+          <pre id="raw" class="bg-gray-900 text-green-400 rounded-xl p-4 text-xs overflow-auto"></pre>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>

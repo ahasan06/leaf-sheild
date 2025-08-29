@@ -1,0 +1,41 @@
+# Ignore the virtual environment (this can be very large)
+venv/
+
+# Ignore model files (e.g., if you're downloading models from Google Drive or external storage)
+model/*.h5
+model/*.tflite
+
+# Ignore cache files from Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.out
+*.err
+
+# Ignore test files (these should not be in production)
+tests/
+*.test.py
+
+# Ignore IDE or editor config files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore pip's cache directory
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Ignore build directories and other generated files
+build/
+dist/
+*.egg-info/
+
+# Ignore Docker-related files (if not using Docker)
+.docker
+docker-compose.yml
+Dockerfile

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" class="h-full">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Leaf Classifier • Select Model</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="min-h-screen bg-gray-50 text-gray-900">
+    <main class="max-w-5xl mx-auto px-4 py-16">
+        <h1 class="text-2xl md:text-3xl font-semibold tracking-tight text-center">Choose a Model</h1>
+        <p class="text-center text-gray-600 mt-2">Pick a crop to start predicting.</p>
+
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <a href="/watermelon"
+                class="group block bg-white rounded-2xl p-8 ring-1 ring-gray-200 shadow-sm hover:shadow transition">
+                <div class="text-xl font-medium">Watermelon</div>
+                <p class="text-gray-600 mt-2">Anthracnose, Downy Mildew, Healthy, Mosaic Virus</p>
+                <div class="mt-6 inline-flex items-center text-gray-700 group-hover:text-gray-900">
+                    <span class="mr-1">Open</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </a>
+
+            <a href="/guava"
+                class="group block bg-white rounded-2xl p-8 ring-1 ring-gray-200 shadow-sm hover:shadow transition">
+                <div class="text-xl font-medium">Guava</div>
+                <p class="text-gray-600 mt-2">Anthracnose, Canker, Dot, Healthy, Rust</p>
+                <div class="mt-6 inline-flex items-center text-gray-700 group-hover:text-gray-900">
+                    <span class="mr-1">Open</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </a>
+
+            <!-- inside the grid with the other two cards -->
+            <a href="/grapes"
+                class="group block bg-white rounded-2xl p-8 ring-1 ring-gray-200 shadow-sm hover:shadow transition">
+                <div class="text-xl font-medium">Grapes</div>
+                <p class="text-gray-600 mt-2">Powdery Mildew, Healthy Leaves, Downy Mildew, Bacterial Leaf Spot</p>
+                <div class="mt-6 inline-flex items-center text-gray-700 group-hover:text-gray-900">
+                    <span class="mr-1">Open</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>
+            </a>
+
+        </div>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Disease Prediction - {{ fruit_key.capitalize() }}</title>
+
+    <!-- ✅ Tailwind CDN with support for arbitrary color values like [#0a0f2c] -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ✅ Optional: Define reusable custom colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        darkStart: "#0a0f2c",
+                        darkEnd: "#0b1e3d"
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-darkStart text-white">
+
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-semibold text-center text-white mb-4">{{ fruit_key.capitalize() }} Disease Prediction</h1>
+        <h3 class="text-center mb-6 text-lg">Select an image to predict the disease</h3>
+
+        <form method="POST" enctype="multipart/form-data" class="text-center">
+            <input type="file" name="image" accept="image/*" required class="mb-4 px-4 py-2 bg-darkEnd text-white rounded">
+            <button type="submit" class="bg-darkEnd hover:bg-darkStart text-white py-2 px-4 rounded">Predict</button>
+        </form>
+
+        {% if result %}
+        <h2 class="mt-6 text-2xl text-center">Prediction Result</h2>
+        <p class="text-center">Label: <span class="font-bold">{{ result.label }}</span></p>
+        <p class="text-center">Confidence: <span class="font-bold">{{ result.confidence }}%</span></p>
+
+        <h3 class="mt-4 text-xl text-center">Prediction Probabilities</h3>
+        <ul class="list-disc pl-10">
+            {% for label, prob in result.probs %}
+            <li>{{ label }}: {{ prob }}%</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <h3 class="mt-6 text-lg text-center">Available Labels:</h3>
+        <ul class="list-disc pl-10">
+            {% for label in labels %}
+            <li>{{ label }}</li>
+            {% endfor %}
+        </ul>
+
+        <br>
+        <a href="{{ url_for('index') }}" class="block text-center mt-4 bg-darkEnd hover:bg-darkStart text-white py-2 px-4 rounded">Back to Home</a>
+    </div>
+
+</body>
+</html>
