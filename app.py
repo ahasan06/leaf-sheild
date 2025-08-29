@@ -154,18 +154,22 @@ def index():
 
 @app.get("/watermelon")
 def page_watermelon():
-    b = get_bundle("watermelon")
-    return render_template("watermelon.html", title=b["title"], model_name="watermelon", labels=b["labels"])
+    c = MODELS["watermelon"]
+    return render_template("watermelon.html",
+                           title=c["title"], model_name="watermelon", labels=c["labels"])
 
 @app.get("/guava")
 def page_guava():
-    b = get_bundle("guava")
-    return render_template("guava.html", title=b["title"], model_name="guava", labels=b["labels"])
+    c = MODELS["guava"]
+    return render_template("guava.html",
+                           title=c["title"], model_name="guava", labels=c["labels"])
 
-@app.get("/grapes")  # NEW
+@app.get("/grapes")
 def page_grapes():
-    b = get_bundle("grapes")
-    return render_template("grapes.html", title=b["title"], model_name="grapes", labels=b["labels"])
+    c = MODELS["grapes"]
+    return render_template("grapes.html",
+                           title=c["title"], model_name="grapes", labels=c["labels"])
+
 
 
 @app.get("/model_info")
