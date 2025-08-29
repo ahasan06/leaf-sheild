@@ -187,6 +187,53 @@ def model_info():
 
 @app.post("/predict")
 def predict():
+    try:
+        name = request.form.get("model", "watermelon")
+        # load model lazily; if missing, raise handled error instead of HTML 500
+        try:
+            b = get_bundle(name)
+        except Exception as e:
+            return jsonify({"error": f"Model '{name}' is not available on the server: {e}"}), 400
+
+        if "image" not in request.files:
+            return jsonify({"error": "No file uploaded"}), 400
+        f = request.files["image"]
+        if not f.filename:
+            return jsonify({"error": "No file selected"}), 400
+
+        try:
+            img = Image.open(io.BytesIO(f.read()))
+        except Exception as e:
+            return jsonify({"error": f"Invalid image: {e}"}), 400
+
+        x = preprocess(img, b)
+        b["interpreter"].set_tensor(b["in_idx"], x)
+        b["interpreter"].invoke()
+
+        y = b["interpreter"].get_tensor(b["out_idx"])[0]
+        y = dequantize(y, b)
+        probs = softmax_if_needed(y)
+
+        n_out = probs.shape[-1]
+        labels = b["labels"] if len(b["labels"]) == n_out else [f"class_{i}" for i in range(n_out)]
+        results = [{"label": labels[i], "prob": float(probs[i])} for i in range(n_out)]
+        results.sort(key=lambda d: d["prob"], reverse=True)
+
+        return jsonify({
+            "model": name,
+            "top_class": results[0]["label"],
+            "confidence": round(results[0]["prob"], 6),
+            "all_probs": results
+        })
+    except Exception as e:
+        import traceback; print(traceback.format_exc())
+        return jsonify({"error": f"Prediction failed: {e}"}), 500
+
+# Optional explicit handlers
+@app.errorhandler(413)
+def too_large(_):
+    return jsonify({"error": "Image too large (max 20 MB)"}), 413
+
     name = request.form.get("model", "watermelon")
     b = get_bundle(name)
 
