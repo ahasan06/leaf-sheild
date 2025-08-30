@@ -87,9 +87,7 @@ Thumbs.db
 # Node.js dependencies
 node_modules/
 
-# Model files (large files)
-model/*.h5
-model/*.tflite
+
 
 # Log files
 *.log
