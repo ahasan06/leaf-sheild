@@ -67,4 +67,4 @@ numpy==1.26.4
 tflite-runtime==2.14.0; python_version < "3.12" and platform_system != "Windows"
 
 # Fallback to TensorFlow on Windows or when Python >= 3.12
-tensorflow-cpu==2.16.1; python_version >= "3.12" or platform_system == "Windows"
+#tensorflow-cpu==2.16.1; python_version >= "3.12" or platform_system == "Windows"
